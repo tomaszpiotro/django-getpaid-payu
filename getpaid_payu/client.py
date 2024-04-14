@@ -97,7 +97,7 @@ class Client:
         data = deepcopy(data)
         if hasattr(data, "items"):
             return {
-                k: Decimal(v) / 100
+                k: int(Decimal(v) * 100)
                 if k in {"amount", "total", "available", "unitPrice", "totalAmount"}
                 else cls._normalize(v)
                 for k, v in data.items()
