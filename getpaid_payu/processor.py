@@ -188,7 +188,8 @@ class PaymentProcessor(BaseProcessor):
                             },
                         )
                 elif status == OrderStatus.CANCELED:
-                    self.payment.fail()
+                    if self.payment.status != 'failed':
+                        self.payment.fail()
                 elif status == OrderStatus.WAITING_FOR_CONFIRMATION:
                     if can_proceed(self.payment.confirm_lock):
                         self.payment.confirm_lock()
